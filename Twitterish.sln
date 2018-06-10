@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitterish", "Twitterish\Twitterish.csproj", "{9B8B3DB8-BC73-48F3-A8F8-9668550F8598}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigHub", "C:\Users\KDRENSKI\source\repos\GigHub\GigHub\GigHub.csproj", "{176E30CC-D5B0-4C80-95C8-312B77046205}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9B8B3DB8-BC73-48F3-A8F8-9668550F8598}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B8B3DB8-BC73-48F3-A8F8-9668550F8598}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B8B3DB8-BC73-48F3-A8F8-9668550F8598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{176E30CC-D5B0-4C80-95C8-312B77046205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{176E30CC-D5B0-4C80-95C8-312B77046205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{176E30CC-D5B0-4C80-95C8-312B77046205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{176E30CC-D5B0-4C80-95C8-312B77046205}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
