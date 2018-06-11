@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using Twitterish.Data;
 using Twitterish.Dtos;
 using Twitterish.Models;
@@ -13,6 +12,7 @@ using Twitterish.Models;
 namespace Twitterish.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class TweetController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -41,26 +41,24 @@ namespace Twitterish.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public IActionResult CreateTweet([FromBody] string msg)
+        public IActionResult CreateTweet([FromBody]TweetDto dto)
         {
-            //var userId = User.Identity.Name;
-
-            //if (!User.Identity.IsAuthenticated)
-            //{
-            //    return BadRequest("Unauthenticated user");
-            //}
+            if (!User.Identity.IsAuthenticated)
+            {
+                return BadRequest("Unauthenticated user");
+            }
 
             var tweet = new Tweet
             {
-                Content = msg,
+                Content = dto.Content,
                 DateTime = DateTime.Now,
-                AuthorId = "8b44e556-e169-4d82-8e09-36bb93205c4a"
+                AuthorId = _userManager.GetUserId(User)
             };
 
             _context.Add(tweet);
             _context.SaveChanges();
 
-            return Ok(msg);
+            return Ok();
         }
 
         // PUT api/<controller>/5

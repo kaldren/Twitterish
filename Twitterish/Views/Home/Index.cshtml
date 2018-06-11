@@ -24,14 +24,18 @@
             $(".js-post-tweet").click(function (e) {
                 var button = $(e.target);
                 var tweetContent = $.trim($(".js-tweet-content").val());
-                console.log("Tweet content: " + tweetContent);
+
+                var ajaxData = {
+                    Content: tweetContent
+                };
 
                 $.ajax({
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
                     url: "/api/tweet",
-                    data: JSON.stringify(tweetContent),
+                    data: JSON.stringify(ajaxData),
                     success: function (response) {
+                        alert("success")
                     }
                 });
             });
