@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Twitterish.Data;
 using Twitterish.Models;
 using Twitterish.Services;
+using Twitterish.Repositories.Interfaces;
+using Twitterish.Repositories;
 
 namespace Twitterish
 {
@@ -35,6 +37,7 @@ namespace Twitterish
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<ITweetRepository, TweetRepository>();
 
             services.AddMvc();
         }

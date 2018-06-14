@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Twitterish.Data;
 using Twitterish.Dtos;
 using Twitterish.Models;
@@ -13,7 +14,7 @@ namespace Twitterish.Controllers
 {
     [Route("api/[controller]")]
     [Authorize]
-    public class TweetController : ControllerBase
+    public class TweetController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -27,16 +28,9 @@ namespace Twitterish.Controllers
 
         // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Tweet> UpdateTweetFeed()
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
+            return _context.Tweets.ToList();
         }
 
         // POST api/<controller>
@@ -58,19 +52,7 @@ namespace Twitterish.Controllers
             _context.Add(tweet);
             _context.SaveChanges();
 
-            return Ok();
-        }
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Ok(UpdateTweetFeed());
         }
     }
 }

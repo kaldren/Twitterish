@@ -5,14 +5,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Twitterish.Models;
+using Twitterish.Repositories.Interfaces;
+using Twitterish.ViewModels;
 
 namespace Twitterish.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ITweetRepository _tweetRepo;
+
+        public HomeController(ITweetRepository tweetRepo)
+        {
+            _tweetRepo = tweetRepo;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var homeViewModel = new HomeViewModel
+            {
+                ShowAllTweets = _tweetRepo.GeAllTweets()
+            };
+
+            return View(homeViewModel);
         }
 
         public IActionResult About()

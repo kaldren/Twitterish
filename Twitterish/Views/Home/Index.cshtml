@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Twitterish.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -18,9 +19,21 @@
     </div>
 </div>
 
+
+<div class="row">
+    <h2>All tweets: </h2>
+    <div class="col-xs-12" id="tweetfeed">
+        @foreach (var tweet in Model.ShowAllTweets)
+        {
+            <p>@tweet.Content</p>
+        }
+    </div>
+</div>
+
 @section scripts {
     <script>
         $(document).ready(function () {
+            /* AJAX POST */
             $(".js-post-tweet").click(function (e) {
                 var button = $(e.target);
                 var tweetContent = $.trim($(".js-tweet-content").val());
@@ -35,10 +48,39 @@
                     url: "/api/tweet",
                     data: JSON.stringify(ajaxData),
                     success: function (response) {
-                        alert("success")
+                        updateTweetsFeed();
                     }
                 });
+
+                function updateTweetsFeed() {
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/tweet",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            //alert(JSON.stringify(data));                  
+                            $.each(data, function (i, item) {
+                                var tweet = "<p id='RegdNo'>" + item.content + "</p>";
+                                $('#tweetfeed').append(tweet);
+                            }); //End of foreach Loop   
+                            console.log(data);
+                        }, //End of AJAX Success function  
+
+                        failure: function (data) {
+                            alert(data.responseText);
+                        }, //End of AJAX failure function  
+                        error: function (data) {
+                            alert(data.responseText);
+                        } //End of AJAX error function  
+
+                    }); 
+                }
             });
+
+            
+
+
         });
     </script>
 }
